@@ -5,6 +5,7 @@ import json, os, string, argparse, sys, praw, shutil, gtts
 parser = argparse.ArgumentParser(description = 'the main program that turns a reddit URL into a video')
 parser.add_argument('--post-url', dest = 'posturl', required = True, help = 'the URL for the reddit post')
 parser.add_argument('--comment-limit', dest = 'commentlimit', required = True, help = 'the max amount of comments to be used for the video')
+parser.add_argument('--output-path', '-o', dest = 'outputpath', required = True, help = 'the path that the program will save the final video')
 
 #parse the arguments
 arguments = parser.parse_args()
@@ -48,7 +49,8 @@ JSONData = {
     'dimensions':readJSONFile('./utils/image-dimensions.json'),
     'fonts':readJSONFile('./utils/fonts.json'),
     'colors':readJSONFile('./utils/color-scheme.json'),
-    'images':readJSONFile('./utils/images.json')
+    'images':readJSONFile('./utils/images.json'),
+    'ffmpeg':readJSONFile('./utils/ffmpeg-config.json')
 }
 
 #create a function that turns the lists of commands into actual command line commands
@@ -143,3 +145,5 @@ for comment in submission.comments:
     #check to make sure the program hasnt gone over the comment limit
     if (commentStep >= commentsLimit):
         break
+
+os.mkdir('./tmp/videos')

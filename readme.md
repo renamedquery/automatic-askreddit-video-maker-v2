@@ -10,8 +10,8 @@
 
 *4.] Run the program. The syntax and an example of the command are shown below:*
 
-*Syntax:* `{pythonRunCommand} ./video-maker.py --post-url {postURL} --comment-limit {commentLimit}`
+*Syntax:* `{pythonRunCommand} ./video-maker.py --post-url {postURL} --comment-limit {commentLimit} --output-path {outputPath}`
 
-*Example:* `python ./video-maker.py --post-url "https://new.reddit.com/r/AskReddit/comments/d8raq7/a_time_machine_has_been_created_but_due_to_an/" --comment-limit "2"`
+*Example:* `python ./video-maker.py --post-url "https://new.reddit.com/r/AskReddit/comments/d8raq7/a_time_machine_has_been_created_but_due_to_an/" --comment-limit "2" --output-path "output.mp4"`
 
 ***If you have any issues with the program, then leave an issue on the github repo.***
