@@ -1,3 +1,3 @@
 {
-    "ffmpeg-run-command":"./ffmpeg/ffmpeg.exe"
+    "ffmpeg-run-command":"ffmpeg"
 }
