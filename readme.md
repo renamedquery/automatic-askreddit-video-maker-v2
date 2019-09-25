@@ -2,11 +2,13 @@
 
 ***How to use it:***
 
-*1.] Set up your FFMPEG run command. If you are on windows then you don't need to do anything, but if you are on linux you might have to do something like change the path to "ffmpeg" if its a command, or if you have it installed in the folder, then "./ffmpeg/ffmpeg.sh".*
+*1.] Set up FFMPEG and install it. Once you have FFMPEG installed, then set the path in the file "./utiks/ffmpeg-config.json" to the path for the command. It should be set to something like "ffmpeg" or "%appdata%/ffmpeg/ffmpeg.exe".*
 
-*2.] Get the link of an askreddit thread that you want to use. The program works for any askreddit thread as long as it contains a title and comments.*
+*2.] Configure the "praw.ini" file in this folder. If you need help on how to fill it out, try looking it up. Without proper information in this file, then the program wont work, as it will fail to authenticate.*
 
-*3.] Run the program. The syntax and an example of the command are shown below:*
+*3.] Get the link of an askreddit thread that you want to use. The program works for any askreddit thread as long as it contains a title and comments.*
+
+*4.] Run the program. The syntax and an example of the command are shown below:*
 
 *Syntax:* `{pythonRunCommand} ./video-maker.py --post-url {postURL} --comment-limit {commentLimit}`
 
