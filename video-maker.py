@@ -1,5 +1,5 @@
 #import statements
-import json, os, string, argparse, sys, praw, shutil, gtts
+import json, os, string, argparse, sys, praw, shutil, gtts, moviepy.editor
 
 #create an argument parser to parse the arguments
 parser = argparse.ArgumentParser(description = 'the main program that turns a reddit URL into a video')
@@ -146,4 +146,56 @@ for comment in submission.comments:
     if (commentStep >= commentsLimit):
         break
 
+#create a directory for the video snippets to go to
 os.mkdir('./tmp/videos')
+
+#create a command that stitches together video and audio files
+FFMPEGAVStitchCommand = 'ffmpeg.exe -loop 1 -i {} -i {} -c:v libx264 -tune stillimage -c:a aac -b:a 192k -pix_fmt yuv420p -shortest {}' #image path | audio path | output path
+
+#get the title image paths
+titleImagePathsTmp = os.listdir('./tmp/coverimage')
+titleImagePaths = []
+for each in titleImagePathsTmp:
+    if (each.split('.')[-1].lower() in ['png', 'gif', 'jpg', 'jpeg']):
+        titleImagePaths.append(each.split('.')[0])
+
+#stitch together the title videos
+for videoIDPath in titleImagePaths:
+    #get the audio and video paths
+    audioPath = './tmp/coverimage/{}.mp3'.format(str(videoIDPath))
+    imagePath = './tmp/coverimage/{}.png'.format(str(videoIDPath))
+
+    #run the ffmpeg command to stitch the media together
+    os.system(FFMPEGAVStitchCommand.format(imagePath, audioPath, './tmp/videos/{}.mp4'.format(makeIntegerFileCountFriendly(fileCount))))
+    
+    #increase the file count
+    fileCount += 1
+
+#get the comment image paths
+commentImagePathsTmp = os.listdir('./tmp/images')
+commentImagePaths = []
+for each in commentImagePathsTmp:
+    if (each.split('.')[-1].lower() in ['png', 'gif', 'jpg', 'jpeg']):
+        commentImagePaths.append(each.split('.')[0])
+
+#stitch together the comment videos
+for videoIDPath in commentImagePaths:
+    #get the audio and video paths
+    audioPath = './tmp/images/{}.mp3'.format(str(videoIDPath))
+    imagePath = './tmp/images/{}.png'.format(str(videoIDPath))
+
+    #run the ffmpeg command to stitch the media together
+    os.system(FFMPEGAVStitchCommand.format(imagePath, audioPath, './tmp/videos/{}.mp4'.format(makeIntegerFileCountFriendly(fileCount))))
+    
+    #increase the file count
+    fileCount += 1
+
+#stitch together the videos
+videoFileList = []
+for eachMP4File in os.listdir('./tmp/videos'):
+    videoFileList.append(moviepy.editor.VideoFileClip('./tmp/videos/' + eachMP4File))
+finalVideo = moviepy.editor.concatenate_videoclips(videoFileList)
+finalVideo.write_videofile(str(arguments.outputpath))
+
+#show the user that the program sucessfully finished
+print('\naskreddit video maker is done\n')
