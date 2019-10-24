@@ -15,3 +15,5 @@
 *Example:* `python ./video-maker.py --post-url "https://new.reddit.com/r/AskReddit/comments/d8raq7/a_time_machine_has_been_created_but_due_to_an/" --comment-limit "2" --output-path "output.mp4"`
 
 ***If you have any issues with the program, then leave an issue on the github repo.***
+
+***An example of the programs output is available at https://youtu.be/HQ9g-uCkjvw***
