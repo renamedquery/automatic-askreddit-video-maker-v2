@@ -2,7 +2,7 @@
 
 ***How to use it:***
 
-*1.] Set up FFMPEG and install it. Once you have FFMPEG installed, then set the path in the file "./utiks/ffmpeg-config.json" to the path for the command. It should be set to something like "ffmpeg" or "%appdata%/ffmpeg/ffmpeg.exe".*
+*1.] Set up FFMPEG and install it. Once you have FFMPEG installed, then set the path in the file "./utils/ffmpeg-config.json" to the path for the command. It should be set to something like "ffmpeg" or "%appdata%/ffmpeg/ffmpeg.exe".*
 
 *2.] Configure the "praw.ini" file in this folder. If you need help on how to fill it out, try looking it up. Without proper information in this file, then the program wont work, as it will fail to authenticate.*
 
